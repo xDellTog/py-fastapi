@@ -1,5 +1,9 @@
 # FastAPI
 
+![Python](https://img.shields.io/badge/-Python-white?logo=python&logoColor=blue)
+![Python](https://img.shields.io/badge/-FastAPI-white?logo=fastapi&logoColor=teal)
+![Python](https://img.shields.io/badge/-MySQL-white?logo=mysql&logoColor=teal)
+
 ## Scripts
 
 ### Create and activate env
