@@ -1,6 +1,7 @@
 import os
 from fastapi import FastAPI
-from app.routes.user import userRouter
+from app.routes.user import user_router
+from app.routes.auth import auth_router
 
 app = FastAPI(
     title=os.environ.get("APP_TITLE"), 
@@ -8,4 +9,5 @@ app = FastAPI(
     version=os.environ.get("APP_VERSION")
 )
 
-app.include_router(userRouter)
+app.include_router(user_router)
+app.include_router(auth_router)

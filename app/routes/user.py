@@ -1,34 +1,33 @@
-from fastapi import APIRouter
-from app.schemas.user import User
-
+from fastapi import APIRouter, Depends
+from app.schemas.user import UserCreate, UserUpdate
 from app.services.user import UserService
+from app.services.auth import AuthService
 
-userRouter = APIRouter(
+auth_service = AuthService()
+user_service = UserService()
+
+user_router = APIRouter(
     prefix="/users",
-    tags=["user"]
+    tags=["user"],
+    dependencies=[Depends(auth_service.authentication_token)]
 )
 
-@userRouter.get("/")
+@user_router.get("/")
 def read():
-    service = UserService()
-    return service.findAll()
+    return user_service.findAll()
 
-@userRouter.get("/{id}")
+@user_router.get("/{id}")
 def read(id: int):
-    service = UserService()
-    return service.findOne(id)
+    return user_service.findOne(id)
 
-@userRouter.post("/")
-def create(user: User):
-    service = UserService()
-    return service.create(user)
+@user_router.post("/")
+def create(user: UserCreate):
+    return user_service.create(user)
 
-@userRouter.put("/{id}")
-def update(id: int, user: User):
-    service = UserService()
-    return service.update(id, user)
+@user_router.put("/{id}")
+def update(id: int, user: UserUpdate):
+    return user_service.update(id, user)
 
-@userRouter.delete("/{id}")
+@user_router.delete("/{id}")
 def delete(id: int):
-    service = UserService()
-    return service.delete(id)
+    return user_service.delete(id)
